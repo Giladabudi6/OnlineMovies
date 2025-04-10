@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { DELETE_USER } from "../../redux/usersSlice";
 import EditUser from "./EditUser";
 import { Box, Typography, IconButton, Dialog, DialogContent, DialogTitle, Chip } from "@mui/material";
-import { Edit, Delete } from "@mui/icons-material";
+import { Edit, Delete, CheckCircle, Cancel } from "@mui/icons-material";
 
 
 const User = ({ user }) => {
@@ -50,10 +50,12 @@ const User = ({ user }) => {
         <Box sx={{ width: "20%", textAlign: "center", justifyContent: "center" }}>
           <Typography>{user.userName}</Typography>
         </Box>
-        <Box sx={{ width: "10%", textAlign: "center", justifyContent: "center" }}>
-          <Typography sx={{ color: user.password ? "#ffffff" : "red" }}>
-            {user.password || "No activated"}
-          </Typography>
+        <Box sx={{ width: "5%", textAlign: "center", justifyContent: "center" }}>
+          {user.password ? (
+            <CheckCircle sx={{ color: "green" }} /> 
+          ) : (
+            <Cancel sx={{ color: "red" }} /> 
+          )}
         </Box>
         <Box sx={{ width: "10%", textAlign: "center", justifyContent: "center" }}>
           <Typography>{user.createdDate}</Typography>
@@ -80,7 +82,7 @@ const User = ({ user }) => {
             <Chip label="No permissions" color="primary" variant="outlined" />
           )}
         </Box>
-        
+
         {/* Action Buttons */}
         <Box
           sx={{
