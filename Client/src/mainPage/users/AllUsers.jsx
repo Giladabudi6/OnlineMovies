@@ -88,48 +88,48 @@ const AllUsers = ({ setShowAdd }) => {
         Add User
       </Button>
 
-      {/* User Table Header */}
-      <Box
-        sx={{
-          width: "92%",
-          marginTop: "20px",
-          marginBottom: "5px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "10px",
-          backgroundColor: "#0288D1",
-          color: "white",
-          borderRadius: "12px 12px 0 0",
-          fontWeight: "bold",
-          fontSize: "1rem",
-          position: "sticky",
-          top: 0,
-          zIndex: 1,
-        }}
-      >
-        <Box sx={{ width: "12%", textAlign: "center" }}>
-          <Typography>Full Name</Typography>
-        </Box>
-        <Box sx={{ width: "20%", textAlign: "center" }}>
-          <Typography>Username</Typography>
-        </Box>
-        <Box sx={{ width: "10%", textAlign: "center" }}>
-          <Typography>Password</Typography>
-        </Box>
-        <Box sx={{ width: "10%", textAlign: "center" }}>
-          <Typography>Created</Typography>
-        </Box>
-        <Box sx={{ width: "8%", textAlign: "center" }}>
-          <Typography>Session</Typography>
-        </Box>
-        <Box sx={{ width: "33%", textAlign: "center" }}>
-          <Typography>Permissions</Typography>
-        </Box>
-        <Box sx={{ width: "7%", textAlign: "center" }}>
-          <Typography>Actions</Typography>
-        </Box>
-      </Box>
+    {/* User Table Header */}
+<Box
+  sx={{
+    width: "92%",
+    marginTop: "20px",
+    marginBottom: "5px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "10px",
+    backgroundColor: "#0288D1",
+    color: "white",
+    borderRadius: "12px 12px 0 0",
+    fontWeight: "bold",
+    fontSize: "1rem",
+    position: "sticky",
+    top: 0,
+    zIndex: 1,
+  }}
+>
+  <Box sx={{ width: "12%", textAlign: "center" }}>
+    <Typography>Full Name</Typography>
+  </Box>
+  <Box sx={{ width: "20%", textAlign: "center" }}>
+    <Typography>Username</Typography>
+  </Box>
+  <Box sx={{ width: "5%", textAlign: "center" }}>
+    <Typography>Activated</Typography> 
+  </Box>
+  <Box sx={{ width: "10%", textAlign: "center" }}>
+    <Typography>Created</Typography>
+  </Box>
+  <Box sx={{ width: "8%", textAlign: "center" }}>
+    <Typography>Session</Typography>
+  </Box>
+  <Box sx={{ width: "38%", textAlign: "center" }}>
+    <Typography>Permissions</Typography>
+  </Box>
+  <Box sx={{ width: "7%", textAlign: "center" }}>
+    <Typography>Actions</Typography>
+  </Box>
+</Box>
 
       {/* Users list */}
       <Box sx={{ width: "100%" }}>
