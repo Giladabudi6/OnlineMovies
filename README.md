@@ -61,16 +61,16 @@ The system's backend is built with a modular design and includes several key com
 
 The system's user interface, built using React and Material-UI, focuses on a comfortable and efficient user experience. It includes main tabs for managing:
 
-![Welcome Screen](client/src/assets/imagesReadme/welcomImage.jpg)
+![Welcome Screen](./Client/src/assets/imagesReadme/welcomImage.jpg)
 
 * **Movies:** Allows (based on permission) viewing, creating, updating, and deleting movies.
-  ![Movies Tab Interface](client/src/assets/imagesReadme/moviesImage.jpg)
+  ![Movies Tab Interface](./Client/src/assets/imagesReadme/moviesImage.jpg)
 
 * **Subscriptions:** Allows (based on permission) viewing, creating, updating, and deleting members and subscriptions for members.
-  ![Subscriptions Tab Interface](client/src/assets/imagesReadme/subscriptionsImage.jpg)
+  ![Subscriptions Tab Interface](./Client/src/assets/imagesReadme/subscriptionsImage.jpg)
 
 * **Users:** (Accessible only to the administrator) Allows managing users, including creation and editing.
-  ![Users Tab Interface](client/src/assets/imagesReadme/usersImage.jpg)
+  ![Users Tab Interface](./Client/src/assets/imagesReadme/usersImage.jpg)
 
 ## Installation and Setup
 
