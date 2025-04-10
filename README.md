@@ -61,7 +61,7 @@ The system's backend is built with a modular design and includes several key com
 
 The system's user interface, built using React and Material-UI, focuses on a comfortable and efficient user experience. It includes main tabs for managing:
 
-![Welcome Screen](./Client/src/assets/imagesReadme/welcomImage.jpg)
+![Welcome Screen](./Client/src/assets/imagesReadme/wellcomImage.jpg)
 
 * **Movies:** Allows (based on permission) viewing, creating, updating, and deleting movies.
   ![Movies Tab Interface](./Client/src/assets/imagesReadme/moviesImage.jpg)
