@@ -81,10 +81,9 @@ The system's user interface, built using React and Material-UI, focuses on a com
 
 1.  **Clone the Repository:**
     ```bash
-    git clone [https://github.com/yourusername/OnlineMovies.git](https://github.com/yourusername/OnlineMovies.git)
+    git clone [https://github.com/giladabudi6/OnlineMovies.git](https://github.com/giladabudi6/OnlineMovies.git)
     cd OnlineMovies
     ```
-
 2.  **Backend Setup (ServerSubscriptions - Port 3000):**
     * Navigate to the server subscriptions directory:
       ```bash
