@@ -5,6 +5,7 @@ import { FETCH_USERS } from "../redux/usersSlice";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
+const USERS_LOGIN_URL = "http://localhost:4000/users/login";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
@@ -12,26 +13,40 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const users = useSelector((state) => state.users.users);
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const theme = useTheme();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (users.length === 0) dispatch(FETCH_USERS());
   }, [dispatch, users.length]);
 
-  const handleLogin = () => {
-    const user = users.find(
-      (u) => userName === u.userName && password === u.password
-    );
-
-    if (!user || password === "") {
-      setError("Invalid username or password!");
-      return;
-    }
+  const handleLogin = async () => {
     setError("");
-    sessionStorage.setItem("userId", user._id);
-    navigate("/MainPage");
+
+    try {
+        // Password validation 
+        const response = await fetch( USERS_LOGIN_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userName, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        sessionStorage.setItem("userId", data.userId);
+        navigate("/MainPage");
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || "Invalid username or password!");
+      }
+    } catch (error) {
+      setError("Failed to connect to the server");
+      console.error("Login error:", error);
+    }
   };
 
   return (
