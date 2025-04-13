@@ -1,5 +1,6 @@
 const express = require("express");
 const usersService = require("../services/usersService");
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
@@ -57,10 +58,35 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await usersService.deleteUser(id); // שמירת התוצאה
+    const result = await usersService.deleteUser(id);
     res.json(result);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
+
+// Handle user login
+router.post("/login", async (req, res) => {
+  const { userName, password } = req.body;
+
+  try {
+    const user = await usersService.getUserByUserName(userName);
+
+    if (!user) {
+      return res.status(401).json({ message: "Invalid username or password" });
+    } // Verify the password
+
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      res.status(200).json({ message: "Login successful", userId: user._id });
+    } else {
+      res.status(401).json({ message: "Invalid username or password" });
+    }
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Login failed" });
+  }
+});
+
 module.exports = router;
