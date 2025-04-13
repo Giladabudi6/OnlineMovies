@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FETCH_USERS, UPDATE_USER } from "../redux/usersSlice";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-
 const CreateAccount = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // New state for confirm password
   const [error, setError] = useState("");
 
   const users = useSelector((state) => state.users.users);
@@ -16,8 +16,17 @@ const CreateAccount = () => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const handleCreate = async () => {
+  useEffect(() => {
     if (users.length === 0) dispatch(FETCH_USERS());
+  }, [dispatch, users.length]);
+
+  const handleCreate = async () => {
+    setError("");
+
+    if (!userName) {
+      setError("Please enter a username.");
+      return;
+    }
 
     const user = users.find((u) => userName === u.userName);
     if (!user) {
@@ -35,9 +44,15 @@ const CreateAccount = () => {
       return;
     }
 
+    if (password !== confirmPassword) {
+      setError("Passwords do not match."); // Error if passwords don't match
+      return;
+    }
+
     dispatch(
       UPDATE_USER({ userId: user._id, updatedUser: { ...user, password } })
     );
+    alert("Account created successfully!");
     navigate("/");
   };
 
@@ -96,6 +111,16 @@ const CreateAccount = () => {
           variant="outlined"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          sx={{ width: "100%", mb: 2 }}
+        />
+
+        {/* Confirm password */}
+        <TextField
+          label="Confirm Password" 
+          type="password"
+          variant="outlined"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
           sx={{ width: "100%", mb: 2 }}
         />
 
