@@ -67,7 +67,7 @@ const User = ({ user }) => {
         {/* User Permissions */}
         <Box
           sx={{
-            width: "33%",
+            width: "38%",
             display: "flex",
             flexWrap: "wrap",
             gap: 1,
