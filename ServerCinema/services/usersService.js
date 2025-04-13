@@ -1,6 +1,8 @@
 const usersFileRepo = require("../repositories/usersFileRepo");
 const usersDBRepo = require("../repositories/usersDBRepo");
 const permissionsFileRepo = require("../repositories/permissionsFileRepo");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 // Get all users with combined data
 const getAllUsers = async () => {
@@ -110,9 +112,15 @@ const updateUser = async (id, userData) => {
       throw new Error("User with the same userName already exists");
     }
 
+    let hashedPassword = userData.password;
+    if (userData.password) {
+      // Hash the password before updating
+      hashedPassword = await bcrypt.hash(userData.password, saltRounds);
+    }
+
     await usersDBRepo.updateUser(id, {
       userName: userData.userName,
-      password: userData.password || "",
+      password: hashedPassword,
     });
 
     const updatedUsersFile = usersFile.map((user) =>
@@ -165,10 +173,21 @@ const deleteUser = async (id) => {
   }
 };
 
+// Get user by username
+const getUserByUserName = async (userName) => {
+  try {
+    const usersDB = await usersDBRepo.getAllUsers();
+    return usersDB.find((user) => user.userName === userName);
+  } catch (error) {
+    throw new Error(`Failed to fetch user by username: ${error.message}`);
+  }
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   addUser,
   updateUser,
   deleteUser,
+  getUserByUserName,
 };
