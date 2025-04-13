@@ -20,7 +20,6 @@ const MainPage = () => {
   const user = useSelector((state) => state.users.currentUser);
   const selectedTab = useSelector((state) => state.tab.activeTab);
   const status = useSelector((state) => state.users.status);
-
   const theme = useTheme();
 
   useEffect(() => {
@@ -29,8 +28,7 @@ const MainPage = () => {
       dispatch(FETCH_USER_BY_ID(userId));
     }
   }, [dispatch]);
-  
-  /* Set Initial Tab Based on Permissions */
+
   useEffect(() => {
     if (user && selectedTab === null && !isLoggingOut) {
       if (user.permissions?.includes("View Movies")) {
@@ -51,23 +49,18 @@ const MainPage = () => {
       dispatch(CLEAR_MEMBERS_SEARCH_QUERY());
       dispatch(RESET_CURRENT_USER());
       sessionStorage.removeItem("userId");
-      if (expired) {
-        setSessionExpired(true);
-      }
+      if (expired) setSessionExpired(true);
       navigate("/");
     },
     [dispatch, navigate]
   );
 
-  /* Session Timeout Logic */
   useEffect(() => {
     if (user && user.sessionTimeOut) {
       const timeoutDuration = user.sessionTimeOut * 60 * 1000;
       const warningDuration = timeoutDuration - 60000;
 
-      const timeoutId = setTimeout(() => {
-        handleLogout(true);
-      }, timeoutDuration);
+      const timeoutId = setTimeout(() => handleLogout(true), timeoutDuration);
 
       let countdownInterval;
       const warningId = setTimeout(() => {
@@ -149,12 +142,7 @@ const MainPage = () => {
 
       {/* Navigation Tabs */}
       {user?.permissions?.length > 0 && (
-        <Box
-          sx={{
-            flexShrink: 0,
-            backgroundColor: "transparent",
-          }}
-        >
+        <Box sx={{ flexShrink: 0, backgroundColor: "transparent" }}>
           <Box
             sx={{ display: "flex", justifyContent: "center", mt: 1, mb: -5 }}
           >
@@ -175,11 +163,9 @@ const MainPage = () => {
                 value="subscriptions"
                 disabled={!user.permissions.includes("View Subscriptions")}
               />
-              <Tab
-                label="Manage Users"
-                value="Users"
-                disabled={user.userName !== "admin"}
-              />
+              {user.userName === "admin" && (
+                <Tab label="Manage Users" value="Users" />
+              )}
             </Tabs>
           </Box>
         </Box>
@@ -196,7 +182,6 @@ const MainPage = () => {
             {selectedTab === "Users" && <UsersTab />}
           </>
         )}
-
         {selectedTab === "no-permissions" && (
           <Typography variant="h6">No available permissions</Typography>
         )}
