@@ -1,6 +1,6 @@
 # Movie and Subscription Management System Project
 
-Welcome to the Movie and Subscription Management System project! 
+Welcome to the Movie and Subscription Management System project!
 This system allows registered users to manage members and subscribe them to movies, utilizing a detailed permission system for access control.
 
 ## Technologies Used
@@ -17,6 +17,8 @@ This system allows registered users to manage members and subscribe them to movi
 * **Database:**
     * MongoDB
 * **Additional Tools:**
+    * bcrypt (password hashing)
+    * Axios (HTTP client)
     * Postman (API testing)
     * Studio 3T (MongoDB management)
 
@@ -25,6 +27,8 @@ This system allows registered users to manage members and subscribe them to movi
 This system offers a comprehensive platform for managing a movie library and subscriptions. Registered users can perform various actions based on their assigned permissions, including creating, viewing, updating, and deleting movies and subscriptions. The system also includes advanced user management with defined access levels and permissions.
 
 ### User Permissions
+
+The system incorporates a robust authentication process to ensure only authorized users or administrators can access specific functionalities. New users created by the administrator must complete an initial registration on the login page to set their password.
 
 The system supports a detailed permission system, including the following permissions:
 
@@ -61,21 +65,16 @@ The system's backend is built with a modular design and includes several key com
 
 The system's user interface, built using React and Material-UI, focuses on a comfortable and efficient user experience. It includes main tabs for managing:
 
-**Login Page:**
-
-![Welcome Screen](./Client/src/assets/imagesReadme/wellcomeImage.jpg)
+![Welcome Screen](./Client/src/assets/imagesReadme/welcomImage.jpg)
 
 * **Movies:** Allows (based on permission) viewing, creating, updating, and deleting movies.
-* 
-  ![Movies Tab Interface](./Client/src/assets/imagesReadme/moviesImage.jpg)
+    ![Movies Tab Interface](./Client/src/assets/imagesReadme/moviesImage.jpg)
 
 * **Subscriptions:** Allows (based on permission) viewing, creating, updating, and deleting members and subscriptions for members.
-* 
-  ![Subscriptions Tab Interface](./Client/src/assets/imagesReadme/subscriptionsImage.jpg)
+    ![Subscriptions Tab Interface](./Client/src/assets/imagesReadme/subscriptionsImage.jpg)
 
 * **Users:** (Accessible only to the administrator) Allows managing users, including creation and editing.
-* 
-  ![Users Tab Interface](./Client/src/assets/imagesReadme/usersImage.jpg)
+    ![Users Tab Interface](./Client/src/assets/imagesReadme/usersImage.jpg)
 
 ## Installation and Setup
 
@@ -96,9 +95,9 @@ The system's user interface, built using React and Material-UI, focuses on a com
     * Create a `.env` file based on `.env.example` and configure the necessary environment variables, such as the MongoDB URI.
     * Run the server:
       ```bash
-      npm run dev         # for development mode with Nodemon (if configured)
+      npm run dev        # for development mode with Nodemon (if configured)
       # or
-      npm start           # for regular execution
+      npm start          # for regular execution
       ```
     * This server will typically run on **http://localhost:3000** (or the port specified in your `.env` file).
 
@@ -114,9 +113,9 @@ The system's user interface, built using React and Material-UI, focuses on a com
     * Create a `.env` file based on `.env.example` and configure the necessary environment variables, such as the MongoDB URI and the API URL for the subscriptions server (`http://localhost:3000`).
     * Run the server:
       ```bash
-      npm run dev         # for development mode with Nodemon (if configured)
+      npm run dev        # for development mode with Nodemon (if configured)
       # or
-      npm start           # for regular execution
+      npm start          # for regular execution
       ```
     * This server will typically run on **http://localhost:4000** (or the port specified in your `.env` file).
 
@@ -174,6 +173,7 @@ The main API endpoints are as follows:
 * `POST /users`: Add a new user (saves data to both file and database).
 * `PUT /users/:id`: Update an existing user (updates data in both file and database).
 * `DELETE /users/:id`: Delete a user by ID (deletes data from both sources).
+* `POST /users/login`: Authenticate a user and provide a user ID upon successful login.
 
 ## Administrator Access
 
